@@ -1,0 +1,69 @@
+:root {
+  --color-content: hsl(0, 0%, 100%);
+  --color-content-soft: hsla(0, 0%, 100%, 80%);
+  --color-content-softer: hsla(0, 0%, 100%, 50%);
+  --color-content-softest: hsla(0, 0%, 100%, 20%);
+  --color-background: hsl(30, 5%, 10%);
+  --color-background-light: hsl(210, 20%, 15%);
+  --color-background-lighter: hsl(210, 20%, 20%);
+  --color-primary: hsl(41, 68%, 62%);
+  --color-primary-soft: hsla(41, 68%, 62%, 50%);
+  --color-primary-softer: hsla(41, 68%, 62%, 20%);
+  --color-primary-softest: hsla(41, 68%, 62%, 10%);
+  --color-primary-lighter: hsl(58, 100%, 78%);
+  --color-primary-darker: hsl(38, 52%, 45%);
+}
+
+:root {
+  --length-margin-xs:16px;
+  --length-margin-s:24px;
+  --length-margin-m:32px;
+  --length-margin-l:48px;
+  --length-margin-xl:64px;
+  --length-margin-xxl:128px;
+  --length-padding-xxs:4px;
+  --length-padding-xs:8px;
+  --length-padding-s:12px;
+  --length-padding-m:16px;
+  --length-padding-l:32px;
+  --length-padding-xl:48px;
+  --length-gap-xs:8px;
+  --length-gap-s:12px;
+  --length-gap-m:16px;
+  --length-radius-m:8px;
+  --lenght-font-xl:64px ;
+}
+
+@font-face {
+  font-family: "aquire";
+  src: url("../assets/fonts/Aquire/Aquire.otf") format("truetype");
+}
+@font-face {
+  font-family: "aquire-light";
+  src: url("../assets/fonts/Aquire/AquireLight.otf") format("truetype");
+}
+@font-face {
+  font-family: "aquire-bold";
+  src: url("../assets/fonts/Aquire/AquireBold.otf") format("truetype");
+}
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: var(--color-content);
+  background-color: var(--color-background);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-primary);
+}
+
+/*# sourceMappingURL=index.css.map */
