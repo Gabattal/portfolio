@@ -72,6 +72,13 @@ import PSVGHexagon from "@/components/PSVGHexagon.vue";
             size: 80px;
             family: aquire, Serif;
         };
+        @media only screen and (max-width : 720px) {
+            line-height: 40px;
+            font:  {
+                size: 40px;
+                family: aquire, Serif;
+            };
+        }
     }
 
     .sub{
