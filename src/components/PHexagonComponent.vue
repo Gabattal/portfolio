@@ -54,8 +54,8 @@ watch(() => windowWidth.value , (newWidth) => {
         littleHexagon.value = 0.75;
     }
     else {
-        bigHexagon.value = 0.85;
-        littleHexagon.value = 0.6;
+        bigHexagon.value = 0.78;
+        littleHexagon.value = 0.53;
     }
 },{ immediate: true });
 

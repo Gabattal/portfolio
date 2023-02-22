@@ -54,8 +54,8 @@ watch(() => windowWidth.value , () => {
         scaleY.value = 50;
     }
     else {
-        scaleX.value = 70.5;
-        scaleY.value = 40;
+        scaleX.value = 66.5;
+        scaleY.value = 38;
     }
 },{ immediate: true });
 </script>
@@ -83,8 +83,8 @@ watch(() => windowWidth.value , () => {
             height: 152px;
         }
         @media only screen and (max-width : 440px) {
-            width: 368px;
-            height: 126px;
+            width: 345px;
+            height: 120px;
         }
 
         polygon.internal {
