@@ -72,6 +72,7 @@ watch(() => windowWidth.value , (newWidth) => {
 }
 
 polygon.internal {
+
     cursor: pointer;
     fill: var(--color-primary-darker);
 
@@ -83,12 +84,13 @@ polygon.internal {
 
 polygon.internal:hover {
     fill: var(--color-primary-lighter);
+    filter: drop-shadow(0 0 10px var(--color-primary-lighter));
 }
 text {
     pointer-events: none;
     text-anchor: middle;
     font-weight: 100;
-    //fill: var(--color-background);
+    fill: var(--color-background);
     font: {
         size: 22px;
         family: aquire-bold, Serif;

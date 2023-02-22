@@ -74,58 +74,28 @@ watch(() => windowWidth.value , () => {
         animation: loading 2s forwards;
         width: 630px;
         height: 220px;
-        @media only screen and (max-width : 730px) {
+        @media only screen and (max-width: 730px) {
             width: 535px;
             height: 185px;
         }
-        @media only screen and (max-width : 530px) {
+        @media only screen and (max-width: 530px) {
             width: 441px;
             height: 152px;
         }
-        @media only screen and (max-width : 440px) {
+        @media only screen and (max-width: 440px) {
             width: 345px;
             height: 120px;
         }
 
-        polygon.internal {
-            cursor: pointer;
-            fill: var(--color-primary-darker);
-
-            :hover {
-                fill: var(--color-primary-lighter);
+        @keyframes loading {
+            from {
+                opacity: 0;
+                transform: scale(1.25);
             }
-        }
-
-        polygon.internal:hover {
-            fill: var(--color-primary-lighter);
-        }
-
-        .external {
-            fill: var(--color-background);
-            stroke: var(--color-primary);
-            stroke-width: 5px;
-        }
-
-        text {
-            pointer-events: none;
-            text-anchor: middle;
-            font-weight: 100;
-            fill: var(--color-background);
-            font: {
-                size: 22px;
-                family: aquire-bold, Serif;
-            };
-        }
-    }
-
-    @keyframes loading {
-        from {
-            opacity: 0;
-            transform: scale(1.25);
-        }
-        to {
-            opacity: 1;
-            transform: scale(1);
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
     }
 }
