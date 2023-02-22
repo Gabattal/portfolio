@@ -33,28 +33,34 @@ geometry.setAttribute("position", positionsAttribute);
 geometry.computeVertexNormals();
 const loader = new THREE.TextureLoader();
 const envTexture = loader.load(background);
-const repartition = ref(15);
+const repartitionX = ref(15);
+const repartitionY = ref(15);
 const count = ref(255);
 
 if (window.innerWidth > 1680){
-    repartition.value = 15;
-    count.value = 255;
+    repartitionX.value = 13;
+    repartitionY.value = 13;
+    count.value = 400;
 }
 else if (window.innerWidth <= 1680 && window.innerWidth > 1200){
-    repartition.value = 15;
+    repartitionX.value = 11;
+    repartitionY.value = 11;
     count.value = 220;
 }
 else if (window.innerWidth <= 1200 && window.innerWidth > 800){
-    repartition.value = 10;
-    count.value = 70;
+    repartitionX.value = 9;
+    repartitionY.value = 9;
+    count.value = 150;
 }
 else if (window.innerWidth <= 800 && window.innerWidth > 400){
-    repartition.value = 7;
-    count.value = 50;
+    repartitionX.value = 7;
+    repartitionY.value = 8;
+    count.value = 180;
 }
 else {
-    repartition.value = 6;
-    count.value = 30;
+    repartitionX.value = 4;
+    repartitionY.value = 8;
+    count.value = 130;
 }
 
 envTexture.mapping = THREE.EquirectangularReflectionMapping;
@@ -82,7 +88,14 @@ material.transparent = true;
 function getRandom(max: number, positive?: boolean) {
 
     const sign = positive ? 1 : Math.sign(0.5 - Math.random());
-    const random = 1 - Math.pow(Math.random(), 2);
+    const random = 1 - (Math.pow(Math.random(), 2) - 0.7);
+    return sign * (random * max);
+}
+
+function getRandomY(max: number, positive?: boolean) {
+
+    const sign = positive ? 1 : Math.sign(0.5 - Math.random());
+    const random = 1 - (Math.pow(Math.random(), 2));
     return sign * (random * max);
 }
 
@@ -92,8 +105,8 @@ for (let i = 0; i < count.value; i++) {
     const random = Math.floor(getRandom(3));
     customMesh.push(random);
     const mesh = new THREE.Mesh(geometry, material);
-    const x = getRandom(repartition.value);
-    const y = getRandom(repartition.value);
+    const x = getRandom(repartitionX.value);
+    const y = getRandomY(repartitionY.value);
     const z = -getRandom(4, true);
     mesh.position.set(x, y, z);
     const rotationX = Math.random() * Math.PI * 2;
@@ -171,7 +184,6 @@ onMounted(() => {
                 break;
             case -3:
                 mesh.rotation.x = -elapsedTime * 0.2;
-                mesh.rotation.y = -elapsedTime * 0.03;
                 break;
             case 1:
                 mesh.rotation.y = elapsedTime * 0.2;
@@ -181,11 +193,9 @@ onMounted(() => {
                 break;
             case 3:
                 mesh.rotation.x = elapsedTime * 0.3;
-                mesh.rotation.y = elapsedTime * 0.03;
                 break;
             default :
                 mesh.rotation.x = elapsedTime * 0.2;
-                mesh.rotation.y = elapsedTime * 0.03;
             }
             index++;
             //mesh.rotation.y = elapsedTime;

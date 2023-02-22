@@ -4,11 +4,6 @@
             <span class="title">Gabriel Attal</span>
             <span class="sub">Fullstack developer</span>
         </div>
-        <div class="box">
-            <svg>
-                <PSVGHexagon scale="" />
-            </svg>
-        </div>
     </div>
 </template>
 

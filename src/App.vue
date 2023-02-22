@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import PIndex from "./components/PIndex.vue";
+import PIndex from "./pages/PIndex.vue";
 import PBackground from "@/components/PBackground.vue";
 import PNavbar from "@/components/PNavbar.vue";
 </script>
 
 <template>
     <PBackground />
-    <PIndex />
+    <router-view />
     <PNavbar />
 </template>
 
