@@ -54,8 +54,8 @@ watch(() => windowWidth.value , (newWidth) => {
         littleHexagon.value = 0.75;
     }
     else {
-        bigHexagon.value = 0.75;
-        littleHexagon.value = 0.5;
+        bigHexagon.value = 0.85;
+        littleHexagon.value = 0.6;
     }
 },{ immediate: true });
 
@@ -105,7 +105,7 @@ text {
             family: aquire-bold, Serif;
         };
     }
-    @media only screen and (max-width : 430px) {
+    @media only screen and (max-width : 440px) {
         font:  {
             size: 10px;
             family: aquire, Serif;
