@@ -23,12 +23,12 @@ const props = withDefaults(defineProps<{
 });
 
 const basePoints: Array<TVector> = [
-    { x: 8.41, y: 25.99 },
-    { x: 8.41, y: 74.01 },
-    { x: 50, y: 98.02 },
-    { x: 91.59, y: 74.01 },
-    { x: 91.59, y: 25.99 },
-    { x: 50, y: 1.98 }
+    { x: 25.99, y: 91.59 },
+    { x: 74.01, y: 91.59 },
+    { x: 98.02, y: 50 },
+    { x: 74.01, y: 8.41 },
+    { x: 25.99, y: 8.41 },
+    { x: 1.98, y: 50 }
 ];
 
 const points = computed(() => {

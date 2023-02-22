@@ -11,8 +11,6 @@ export default {
 <script setup lang="ts">
 import * as THREE from "three";
 import { onMounted, ref } from "vue";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { RectAreaLightHelper } from "three/examples/jsm/helpers/RectAreaLightHelper.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import background from "../assets/img/background.png";
 const experience = ref<HTMLCanvasElement | null>(null);
@@ -113,6 +111,8 @@ const sizes = {
     height: window.innerHeight,
     width: window.innerWidth
 };
+
+
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
 camera.position.z = 7;
 scene.add(camera);
