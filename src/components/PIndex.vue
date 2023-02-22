@@ -8,8 +8,6 @@
             <svg>
                 <PSVGHexagon scale="" />
             </svg>
-            <canvas id="sandbox">
-                <PSVGHexagon /></canvas>
         </div>
     </div>
 </template>
