@@ -61,6 +61,10 @@ html, body, #app {
   height: 100vh;
 }
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   margin: 0;
   display: flex;
