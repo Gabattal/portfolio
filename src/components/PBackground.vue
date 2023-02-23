@@ -100,6 +100,13 @@ function getRandom(max: number, positive?: boolean) {
     return sign * (random * max);
 }
 
+function getRandomX(max: number, index: number, count: number) {
+
+    const sign = index > count / 2 ? 1 : -1;
+    const random = 1 - (Math.pow(Math.random(), 2) - 0.7);
+    return sign * (random * max);
+}
+
 function getRandomY(max: number, positive?: boolean) {
 
     const sign = positive ? 1 : Math.sign(0.5 - Math.random());
@@ -113,7 +120,7 @@ for (let i = 0; i < count.value; i++) {
     const random = Math.floor(getRandom(3));
     customMesh.push(random);
     const mesh = new THREE.Mesh(geometry, material);
-    const x = getRandom(repartitionX.value);
+    const x = getRandomX(repartitionX.value,i,count.value);
     const y = getRandomY(repartitionY.value);
     const z = -getRandom(4, true);
     mesh.position.set(x, y, z);
