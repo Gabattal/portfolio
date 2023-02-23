@@ -1,20 +1,22 @@
 <template>
-    <PSVGHexagon
-        class="external"
-        :location="({ x: startPosition.x, y: startPosition.y })"
-        :scale="bigHexagon"
-    />
-    <PSVGHexagon
-        class="internal"
-        :location="({ x: 12.5+startPosition.x, y: 12.5+startPosition.y })"
-        :scale="littleHexagon"
-    />
-    <text
-        :x="50*bigHexagon+startPosition.x"
-        :y="55*bigHexagon+startPosition.y"
-    >
-        {{ text }}
-    </text>
+    <g>
+        <PSVGHexagon
+            class="external"
+            :location="({ x: startPosition.x, y: startPosition.y })"
+            :scale="bigHexagon"
+        />
+        <PSVGHexagon
+            class="internal"
+            :location="({ x: 12.5+startPosition.x, y: 12.5+startPosition.y })"
+            :scale="littleHexagon"
+        />
+        <text
+            :x="50*bigHexagon+startPosition.x"
+            :y="55*bigHexagon+startPosition.y"
+        >
+            {{ text }}
+        </text>
+    </g>
 </template>
 
 <script lang="ts">
@@ -37,6 +39,9 @@ const props = withDefaults(defineProps<{
     startPosition: () => ({ x: 0, y: 0 }),
     text: "text"
 });
+
+//const emits = defineEmits(["click"]);
+//emits("click",[]);
 const bigHexagon = ref(1.5);
 const littleHexagon = ref(1.25);
 

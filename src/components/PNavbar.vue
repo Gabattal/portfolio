@@ -4,22 +4,27 @@
             <PHexagonComponent
                 :start-position="({ x: 0, y: 0 })"
                 text="About"
+                @click="goToPage('/about')"
             />
             <PHexagonComponent
                 :start-position="({ x: scaleX, y: scaleY })"
                 text="Work"
+                @click="goToPage('/work')"
             />
             <PHexagonComponent
                 :start-position="({ x: scaleX*2, y: 0 })"
                 text="Links"
+                @click="goToPage('/links')"
             />
             <PHexagonComponent
                 :start-position="({ x: scaleX*3, y: scaleY })"
                 text="Contact"
+                @click="goToPage('/contact')"
             />
             <PHexagonComponent
                 :start-position="({ x: scaleX*4, y: 0 })"
                 text="Skills"
+                @click="goToPage('/skills')"
             />
         </svg>
     </div>
@@ -32,10 +37,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue";
+import { ref, watch } from "vue";
 import { useWindowSize } from "@vueuse/core";
-import PSVGHexagon from "@/components/PSVGHexagon.vue";
 import PHexagonComponent from "@/components/PHexagonComponent.vue";
+import { router } from "@/router";
 const { width: windowWidth } = useWindowSize();
 const scaleX = ref(120);
 const scaleY = ref(70);
@@ -58,17 +63,21 @@ watch(() => windowWidth.value , () => {
         scaleY.value = 38;
     }
 },{ immediate: true });
+
+async function goToPage(pageName: string){
+    await router.push(pageName);
+}
+
 </script>
 
 <style scoped lang="scss">
 .container {
-    position: absolute;
+    position: relative;
     width: 100%;
-    height: 100%;
     z-index: 100;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: flex-start;
 
     svg {
         animation: loading 2s forwards;

@@ -1,20 +1,18 @@
 <template>
     <div class="main">
         <div class="hero">
-            <span class="title">Gabriel Attal</span>
-            <span class="sub">Fullstack developer</span>
+            <span class="title">Contact</span>
         </div>
     </div>
 </template>
 
 <script lang="ts">
 export default {
-    name: "PIndex"
+    name: "PContact"
 };
 </script>
 
 <script setup lang="ts">
-import PSVGHexagon from "@/components/PSVGHexagon.vue";
 
 </script>
 

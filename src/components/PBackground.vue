@@ -10,8 +10,9 @@ export default {
 
 <script setup lang="ts">
 import * as THREE from "three";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { useRoute } from "vue-router";
 import background from "../assets/img/background.png";
 
 const experience = ref<HTMLCanvasElement | null>(null);
@@ -36,6 +37,13 @@ const envTexture = loader.load(background);
 const repartitionX = ref(15);
 const repartitionY = ref(15);
 const count = ref(255);
+const loadingPage = ref(0);
+const route = useRoute();
+
+watch(route, () => {
+    loadingPage.value = 1;
+});
+
 
 if (window.innerWidth > 1680){
     repartitionX.value = 13;
@@ -45,7 +53,7 @@ if (window.innerWidth > 1680){
 else if (window.innerWidth <= 1680 && window.innerWidth > 1200){
     repartitionX.value = 11;
     repartitionY.value = 11;
-    count.value = 220;
+    count.value = 240;
 }
 else if (window.innerWidth <= 1200 && window.innerWidth > 800){
     repartitionX.value = 9;
@@ -126,23 +134,6 @@ for (const mesh of meshes) {
     scene.add(mesh);
 }
 
-const materialPlane = new THREE.MeshPhysicalMaterial({
-    color: 0x1b1a18
-    //wireframe: true
-});
-
-
-/*
-const plane = new THREE.Mesh(
-    new THREE.PlaneGeometry(5000, 5000),
-    materialPlane
-);
-plane.rotation.x = - Math.PI * 2 ;
-plane.position.z = -100;
-
-scene.add(plane);*/
-
-
 const sizes = {
     height: window.innerHeight,
     width: window.innerWidth
@@ -168,34 +159,46 @@ onMounted(() => {
     renderer.setSize(sizes.width, sizes.height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.render(scene, camera);
+    console.log(meshes[0]);
 
     const clock = new THREE.Clock();
     const tick = () => {
         // Time
         const elapsedTime = clock.getElapsedTime();
         let index = 0;
+        console.log(meshes[0].position.y);
         for (const mesh of meshes) {
+            if (mesh.position.y < -13){
+                mesh.position.y = 13;
+            }
             switch (customMesh[index]) {
             case -1:
                 mesh.rotation.y = -elapsedTime * 0.1;
+                mesh.position.y -= 0.01;
                 break;
             case -2:
                 mesh.rotation.z = -elapsedTime * 0.3;
+                mesh.position.y -= 0.03;
                 break;
             case -3:
                 mesh.rotation.x = -elapsedTime * 0.2;
+                mesh.position.y -= 0.02;
                 break;
             case 1:
                 mesh.rotation.y = elapsedTime * 0.2;
+                mesh.position.y -= 0.04;
                 break;
             case 2:
                 mesh.rotation.z = elapsedTime * 0.1;
+                mesh.position.y -= 0.03;
                 break;
             case 3:
                 mesh.rotation.x = elapsedTime * 0.3;
+                mesh.position.y -= 0.02;
                 break;
             default :
                 mesh.rotation.x = elapsedTime * 0.2;
+                mesh.position.y -= 0.01;
             }
             index++;
             //mesh.rotation.y = elapsedTime;
