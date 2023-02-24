@@ -7,7 +7,15 @@ const alias = {
 };
 
 export default defineConfig({
-    plugins: [vue()],
+    plugins: [
+        vue({
+            template: {
+                compilerOptions: {
+                    isCustomElement: (tag) => ["md-linedivider"].includes(tag)
+                }
+            }
+        })
+    ],
     resolve: {
         alias
     },

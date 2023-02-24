@@ -1,7 +1,9 @@
 <template>
     <div class="main">
         <div class="hero">
-            <span class="title">About</span>
+            <div class="title">
+                About
+            </div>
         </div>
     </div>
 </template>
@@ -17,25 +19,27 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.main{
+.main {
     height: 100%;
     position: absolute;
     margin-left: auto;
     margin-right: auto;
-    top:0;
+    top: 0;
     left: 0;
     right: 0;
     text-align: center;
     z-index: 1;
-    .hero{
+
+    .hero {
         gap: 16px;
         flex-direction: column;
         height: 100%;
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
+        overflow: auto;
 
-        .title{
+        .title {
             background: linear-gradient(to bottom, var(--color-primary-lighter) 0%, var(--color-primary-darker) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -46,21 +50,25 @@ export default {
                 size: 80px;
                 family: aquire, Serif;
             };
-            @media only screen and (max-width : 730px) {
+            @media only screen and (max-width: 730px) {
                 line-height: 40px;
-                font:  {
+                font: {
                     size: 40px;
                     family: aquire, Serif;
                 };
             }
         }
 
-        .sub{
+        .sub {
             text-transform: uppercase;
             font-size: 26px;
             letter-spacing: 12px;
             font-weight: 100;
             color: var(--color-content-softest);
+        }
+
+        .content{
+            width: 40%;
         }
     }
 }

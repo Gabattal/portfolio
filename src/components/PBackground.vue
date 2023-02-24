@@ -46,7 +46,7 @@ watch(route, () => {
 
 
 if (window.innerWidth > 1680){
-    repartitionX.value = 13;
+    repartitionX.value = 18;
     repartitionY.value = 13;
     count.value = 400;
 }
@@ -78,8 +78,6 @@ const material = new THREE.MeshPhysicalMaterial({
     metalness: 1,
     reflectivity: 0.8,
     roughness: 0
-
-    //wireframe: true
 });
 
 material.ior = 1.7;
@@ -103,14 +101,16 @@ function getRandom(max: number, positive?: boolean) {
 function getRandomX(max: number, index: number, count: number) {
 
     const sign = index > count / 2 ? 1 : -1;
-    const random = 1 - (Math.pow(Math.random(), 2) - 0.7);
+    //const random = 1 - (Math.pow(Math.random(), 2) - 0.7);
+    const random = 1 - (Math.random());
     return sign * (random * max);
 }
 
 function getRandomY(max: number, positive?: boolean) {
 
     const sign = positive ? 1 : Math.sign(0.5 - Math.random());
-    const random = 1 - (Math.pow(Math.random(), 2));
+    //const random = 1 - (Math.pow(Math.random(), 2));
+    const random = 1 - (Math.random());
     return sign * (random * max);
 }
 
@@ -166,14 +166,11 @@ onMounted(() => {
     renderer.setSize(sizes.width, sizes.height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.render(scene, camera);
-    console.log(meshes[0]);
-
     const clock = new THREE.Clock();
     const tick = () => {
         // Time
         const elapsedTime = clock.getElapsedTime();
         let index = 0;
-        console.log(meshes[0].position.y);
         for (const mesh of meshes) {
             if (mesh.position.y < -13){
                 mesh.position.y = 13;
