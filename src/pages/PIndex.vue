@@ -92,6 +92,22 @@ const cardStyle = computed<CSSProperties>(() => {
         height: 500px;
         perspective: 1000px;
 
+        @media only screen and (max-width: 1300px) {
+            width: 680px;
+            height: 400px;
+        }
+
+        @media only screen and (max-width: 730px) {
+            width: 425px;
+            height: 250px;
+        }
+
+        @media only screen and (max-width: 430px) {
+            width: 272px;
+            height: 160px;
+        }
+
+
         &:hover{
             scale:(1.1);
         }
@@ -108,6 +124,12 @@ const cardStyle = computed<CSSProperties>(() => {
             align-items: center;
             background-color: var(--color-background-soft);
             padding: var(--length-padding-l);
+            @media only screen and (max-width: 730px) {
+                padding: var(--length-padding-m);
+            }
+            @media only screen and (max-width: 430px) {
+                padding: var(--length-padding-s);
+            }
             animation: loading 4s forwards;
             box-shadow: 0 0 32px var(--color-background);
             --angleX: 0deg;
@@ -137,10 +159,24 @@ const cardStyle = computed<CSSProperties>(() => {
                     size: 80px;
                     family: aquire, Serif;
                 };
+                @media only screen and (max-width: 1300px) {
+                    line-height: 60px;
+                    font: {
+                        size: 60px;
+                        family: aquire, Serif;
+                    };
+                }
                 @media only screen and (max-width: 730px) {
                     line-height: 40px;
                     font: {
                         size: 40px;
+                        family: aquire, Serif;
+                    };
+                }
+                @media only screen and (max-width: 430px) {
+                    line-height: 30px;
+                    font: {
+                        size: 30px;
                         family: aquire, Serif;
                     };
                 }
@@ -154,6 +190,21 @@ const cardStyle = computed<CSSProperties>(() => {
                 font-weight: 100;
                 margin-top: var(--length-margin-l);
                 color: var(--color-content-softer);
+                @media only screen and (max-width: 1300px) {
+                    font-size: 22px;
+                    letter-spacing: 10px;
+                    margin-top: var(--length-margin-m);
+                }
+                @media only screen and (max-width: 730px) {
+                    font-size: 16px;
+                    letter-spacing: 8px;
+                    margin-top: var(--length-margin-s);
+                }
+                @media only screen and (max-width: 430px) {
+                    margin-top: var(--length-margin-xs);
+                    font-size: 10px;
+                    letter-spacing: 4px;
+                }
             }
 
             .glow{
@@ -174,6 +225,12 @@ const cardStyle = computed<CSSProperties>(() => {
                 height: 100%;
                 .left{
                     gap: var(--length-margin-xs);
+                    @media only screen and (max-width: 730px) {
+                        gap: 8px
+                    }
+                    @media only screen and (max-width: 430px) {
+                        gap : 4px
+                    }
                     width: 50%;
                     display: flex;
                     flex-direction: column;
@@ -184,6 +241,15 @@ const cardStyle = computed<CSSProperties>(() => {
                         font-size: 16px;
                         letter-spacing: 2px;
                         color: var(--color-primary);
+
+                        @media only screen and (max-width: 730px) {
+                            font-size: 12px;
+                            letter-spacing: 2px;
+                        }
+                        @media only screen and (max-width: 430px) {
+                            font-size: 10px;
+                            letter-spacing: 1px;
+                        }
                     }
                     .mail{
                         z-index: 10;
@@ -191,6 +257,15 @@ const cardStyle = computed<CSSProperties>(() => {
                         font-size: 12px;
                         letter-spacing: 2px;
                         color: var(--color-primary);
+
+                        @media only screen and (max-width: 730px) {
+                            font-size: 10px;
+                            letter-spacing: 2px;
+                        }
+                        @media only screen and (max-width: 430px) {
+                            font-size: 8px;
+                            letter-spacing: 1px;
+                        }
                     }
                 }
                 .right{
@@ -200,12 +275,27 @@ const cardStyle = computed<CSSProperties>(() => {
                     align-items: flex-end;
                     justify-content: flex-end;
                     flex-direction: column;
+                    @media only screen and (max-width: 730px) {
+                        gap: 8px
+                    }
+                    @media only screen and (max-width: 430px) {
+                        gap : 4px
+                    }
                     .link{
                         z-index: 10;
                         text-transform: uppercase;
                         font-size: 12px;
                         letter-spacing: 2px;
                         color: var(--color-primary);
+
+                        @media only screen and (max-width: 730px) {
+                            font-size: 10px;
+                            letter-spacing: 2px;
+                        }
+                        @media only screen and (max-width: 430px) {
+                            font-size: 8px;
+                            letter-spacing: 1px;
+                        }
                     }
                 }
             }
