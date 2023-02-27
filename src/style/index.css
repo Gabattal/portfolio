@@ -3,7 +3,7 @@
   --color-content-soft: hsla(0, 0%, 100%, 80%);
   --color-content-softer: hsla(0, 0%, 100%, 50%);
   --color-content-softest: hsla(0, 0%, 100%, 20%);
-  --color-background: hsl(30, 5%, 10%);
+  --color-background: hsl(30, 10%, 7%);
   --color-background-soft: hsla(30, 5%, 10%,50%);
   --color-background-light: hsl(210, 20%, 15%);
   --color-background-lighter: hsl(210, 20%, 20%);
@@ -13,6 +13,7 @@
   --color-primary-softest: hsla(41, 68%, 62%, 10%);
   --color-primary-lighter: hsl(58, 100%, 78%);
   --color-primary-darker: hsl(38, 52%, 45%);
+  --color-primary-darkest: hsl(38, 52%, 20%);
 }
 
 :root {
@@ -54,6 +55,7 @@
   color-scheme: light dark;
   color: var(--color-content);
   background-color: var(--color-background);
+  background: radial-gradient(circle at center 180%, var(--color-primary-darkest) 0%, var(--color-background) 90%);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }

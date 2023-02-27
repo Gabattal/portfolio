@@ -122,7 +122,7 @@ const cardStyle = computed<CSSProperties>(() => {
 
 
         &:hover{
-            scale:(1.1);
+            scale:(1.05);
         }
 
 
@@ -155,8 +155,8 @@ const cardStyle = computed<CSSProperties>(() => {
                 transform: rotateX(var(--angleX)) rotateY(var(--angleY));
                 box-shadow: 0 0 8px var(--color-primary);
                 .glow{
-                    background: radial-gradient(circle at var(--glowX) var(--glowY), white, transparent);
-                    transition: all .15s ease-out;
+                    background: radial-gradient(circle at var(--glowX) var(--glowY), var(--color-primary), transparent);
+                    transition: all .50s ease-in-out;
                 }
             }
 
@@ -326,7 +326,7 @@ const cardStyle = computed<CSSProperties>(() => {
                     backdrop-filter: blur(0);
                 }
                 to {
-                    backdrop-filter: blur(16px);
+                    backdrop-filter: blur(20px);
                 }
             }
         }

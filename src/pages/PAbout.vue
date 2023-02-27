@@ -9,8 +9,13 @@
             >
                 <section class="info">
                     <span class="title">About</span>
+                    <p class="sub">
+                        I'm an experienced French web developer specializing in React and Vue frameworks. My
+                        technical expertise enables me to quickly adapt to various projects, whether working solo or in
+                        a team, while delivering clean, structured, and optimized code. I love tackling challenges and
+                        building creative websites.
+                    </p>
                 </section>
-                <div class="glow" />
             </div>
         </div>
     </div>
@@ -36,11 +41,6 @@ export default {
     align-items: center;
     z-index: 1;
 
-    :hover hero {
-        transform: perspective(1000px);
-        transform-style: preserve-3d;
-    }
-
     .hero {
         margin-top: var(--length-margin-xl);
         gap: 16px;
@@ -60,20 +60,20 @@ export default {
 
         @media only screen and (max-width: 430px) {
             width: 272px;
-            height: 160px;
+            height: 500px;
         }
 
 
         .content-card {
+            overflow: auto;
+            flex: 1;
             border-radius: 8px;
             width: 100%;
             height: 100%;
             box-sizing: border-box;
-            overflow: hidden;
-            display: flex;
+            display: inline-flex;
             flex-direction: column;
             align-items: center;
-            background-color: var(--color-background-soft);
             padding: var(--length-padding-l);
             @media only screen and (max-width: 730px) {
                 padding: var(--length-padding-m);
@@ -82,31 +82,23 @@ export default {
                 padding: var(--length-padding-s);
             }
             animation: loading 4s forwards;
-            box-shadow: 0 0 32px var(--color-background);
             --angleX: 0deg;
             --angleY: 0deg;
             --glowX: 50%;
             --glowY: 0;
             transition: all .15s ease-out;
 
-            &:hover{
-                transform: rotateX(var(--angleX)) rotateY(var(--angleY));
-                box-shadow: 0 0 8px var(--color-primary);
-                .glow{
-                    background: radial-gradient(circle at var(--glowX) var(--glowY), white, transparent);
-                    transition: all .15s ease-out;
-                }
-            }
-
-            .info{
+            .info {
                 height: 80%;
                 z-index: 100;
-                display: flex;
+                display: inline-block;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+
                 .title {
                     z-index: 10;
+                    width: 100%;
                     background: linear-gradient(to bottom, var(--color-primary-lighter) 0%, var(--color-primary-darker) 100%);
                     -webkit-background-clip: text;
                     -webkit-text-fill-color: transparent;
@@ -142,48 +134,48 @@ export default {
 
                 .sub {
                     z-index: 10;
-                    text-transform: uppercase;
-                    font-size: 26px;
-                    letter-spacing: 12px;
+                    line-height: 2em;
+                    font-size: 20px;
+
+
                     font-weight: 100;
                     margin-top: var(--length-padding-l);
-                    color: var(--color-content-softer);
+                    color: var(--color-content-soft);
                     @media only screen and (max-width: 1300px) {
-                        font-size: 22px;
-                        letter-spacing: 10px;
+                        font-size: 16px;;
                         margin-top: var(--length-padding-m);
                     }
                     @media only screen and (max-width: 730px) {
-                        font-size: 16px;
-                        letter-spacing: 8px;
+                        font-size: 12px;
                         margin-top: var(--length-padding-s);
                     }
                     @media only screen and (max-width: 430px) {
                         margin-top: var(--length-padding-xs);
-                        font-size: 10px;
-                        letter-spacing: 4px;
+                        font-size: 12px;
                     }
                 }
             }
 
-            .contact{
+            .contact {
                 display: flex;
                 flex-direction: row;
                 width: 100%;
                 height: 20%;
-                .left{
+
+                .left {
                     gap: var(--length-margin-xs);
                     @media only screen and (max-width: 730px) {
                         gap: 8px
                     }
                     @media only screen and (max-width: 430px) {
-                        gap : 4px
+                        gap: 4px
                     }
                     width: 50%;
                     display: flex;
                     flex-direction: column;
                     justify-content: flex-end;
-                    .phone{
+
+                    .phone {
                         z-index: 10;
                         text-transform: uppercase;
                         font-size: 16px;
@@ -199,7 +191,8 @@ export default {
                             letter-spacing: 1px;
                         }
                     }
-                    .mail{
+
+                    .mail {
                         z-index: 10;
                         text-transform: uppercase;
                         font-size: 12px;
@@ -216,7 +209,8 @@ export default {
                         }
                     }
                 }
-                .right{
+
+                .right {
                     gap: var(--length-margin-xs);
                     width: 50%;
                     display: flex;
@@ -227,9 +221,10 @@ export default {
                         gap: 8px
                     }
                     @media only screen and (max-width: 430px) {
-                        gap : 4px
+                        gap: 4px
                     }
-                    .link{
+
+                    .link {
                         z-index: 10;
                         text-transform: uppercase;
                         font-size: 12px;

@@ -38,6 +38,7 @@ const repartitionX = ref(15);
 const repartitionY = ref(15);
 const count = ref(255);
 const split = ref(0);
+const curtains = ref(0);
 const route = useRoute();
 
 if (window.innerWidth > 1680){
@@ -45,30 +46,35 @@ if (window.innerWidth > 1680){
     repartitionY.value = 13;
     count.value = 400;
     split.value = 6;
+    curtains.value = 10;
 }
 else if (window.innerWidth <= 1680 && window.innerWidth > 1200){
     repartitionX.value = 11;
     repartitionY.value = 11;
     count.value = 240;
     split.value = 6;
+    curtains.value = 10;
 }
 else if (window.innerWidth <= 1200 && window.innerWidth > 800){
     repartitionX.value = 9;
     repartitionY.value = 9;
     count.value = 150;
     split.value = 6;
+    curtains.value = 10;
 }
 else if (window.innerWidth <= 800 && window.innerWidth > 400){
     repartitionX.value = 7;
     repartitionY.value = 8;
     count.value = 180;
     split.value = 6;
+    curtains.value = 10;
 }
 else {
     repartitionX.value = 4;
     repartitionY.value = 8;
     count.value = 130;
     split.value = 6;
+    curtains.value = 10;
 }
 
 envTexture.mapping = THREE.EquirectangularReflectionMapping;
@@ -175,23 +181,28 @@ onMounted(() => {
         const elapsedTime = clock.elapsedTime;
         let index = 0;
         for (const mesh of meshes) {
+            const deltaDistance = Math.abs(initialX[index] - mesh.position.x);
             if (mesh.position.y < -13){
                 mesh.position.y += 26;
             }
-            if (route.name !== "home"){
-                if (initialX[index] < split.value - 6 && Math.abs(initialX[index] - mesh.position.x) < 10){
-                    mesh.position.x -= delta * 2 ;
+            if (route.name !== "home" && route.name){
+                const splitSpeed = curtains.value - deltaDistance;
+                //const calc = -Math.cos(deltaDistance / 10 * Math.PI) / 2;
+                //console.log(calc);
+                if (initialX[index] < 0 && Math.abs(initialX[index] - mesh.position.x) < curtains.value){
+                    mesh.position.x -= delta * splitSpeed ;
                 }
-                if (initialX[index] > split.value - 6 && Math.abs(initialX[index] - mesh.position.x) < 10){
-                    mesh.position.x += delta * 2 ;
+                if (initialX[index] > 0 && Math.abs(initialX[index] - mesh.position.x) < curtains.value){
+                    mesh.position.x += delta * splitSpeed ;
                 }
             }
             else {
-                if (initialX[index] < split.value - 6 && mesh.position.x < initialX[index]){
-                    mesh.position.x += delta * 2 ;
+                const gatherSpeed = deltaDistance;
+                if (initialX[index] < 0 && mesh.position.x < initialX[index]){
+                    mesh.position.x += delta * gatherSpeed ;
                 }
-                if (initialX[index] > split.value - 6 && mesh.position.x > initialX[index]){
-                    mesh.position.x -= delta * 2 ;
+                if (initialX[index] > 0 && mesh.position.x > initialX[index]){
+                    mesh.position.x -= delta * gatherSpeed ;
                 }
             }
             switch (customMesh[index]) {
