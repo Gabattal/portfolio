@@ -7,11 +7,12 @@
             <div
                 class="content-card"
                 :style="cardStyle"
-                @mouseleave="test"
             >
-                <span class="title">Gabriel Attal</span>
-                <span class="sub">Fullstack developer</span>
-                <span class="sub">--Available now--</span>
+                <section class="info">
+                    <span class="title">Gabriel Attal</span>
+                    <span class="sub">Fullstack developer</span>
+                    <span class="sub">--Available now--</span>
+                </section>
                 <section class="contact">
                     <div class="left">
                         <span class="phone">+33 6 95 64 98 25</span>
@@ -43,9 +44,20 @@ const { x: mouseX, y: mouseY } = useMouse();
 
 const cardStyle = computed<CSSProperties>(() => {
     const bounding = refCard.value?.getBoundingClientRect();
+    let angleRatio = 32;
 
     if (!bounding) {
         return {};
+    }
+
+    if (window.innerWidth < 1300){
+        angleRatio = 18;
+    }
+    if (window.innerWidth < 730){
+        angleRatio = 12;
+    }
+    if (window.innerWidth < 430){
+        angleRatio = 6;
     }
     const x = mouseX.value - bounding.x;
     const y = mouseY.value - bounding.y;
@@ -53,8 +65,8 @@ const cardStyle = computed<CSSProperties>(() => {
     const midCardWidth = bounding.width / 2;
     const midCardHeight = bounding.height / 2;
 
-    const angleY = -(x - midCardWidth) / 16;
-    const angleX = (y - midCardHeight) / 16;
+    const angleY = -(x - midCardWidth) / angleRatio;
+    const angleX = (y - midCardHeight) / angleRatio;
 
     const glowX = x / bounding.width * 100;
     const glowY = y / bounding.height * 100;
@@ -91,6 +103,7 @@ const cardStyle = computed<CSSProperties>(() => {
         width: 850px;
         height: 500px;
         perspective: 1000px;
+        transition: scale .2s ease-in-out;
 
         @media only screen and (max-width: 1300px) {
             width: 680px;
@@ -147,63 +160,71 @@ const cardStyle = computed<CSSProperties>(() => {
                 }
             }
 
-            .title {
-                z-index: 10;
-                background: linear-gradient(to bottom, var(--color-primary-lighter) 0%, var(--color-primary-darker) 100%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                text-shadow: 0 0 32px var(--color-primary-soft);
-                white-space: nowrap;
-                line-height: 80px;
-                font: {
-                    size: 80px;
-                    family: aquire, Serif;
-                };
-                @media only screen and (max-width: 1300px) {
-                    line-height: 60px;
+            .info{
+                height: 80%;
+                z-index: 100;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                .title {
+                    z-index: 10;
+                    background: linear-gradient(to bottom, var(--color-primary-lighter) 0%, var(--color-primary-darker) 100%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    text-shadow: 0 0 32px var(--color-primary-soft);
+                    white-space: nowrap;
+                    line-height: 80px;
                     font: {
-                        size: 60px;
+                        size: 80px;
                         family: aquire, Serif;
                     };
+                    @media only screen and (max-width: 1300px) {
+                        line-height: 60px;
+                        font: {
+                            size: 60px;
+                            family: aquire, Serif;
+                        };
+                    }
+                    @media only screen and (max-width: 730px) {
+                        line-height: 40px;
+                        font: {
+                            size: 40px;
+                            family: aquire, Serif;
+                        };
+                    }
+                    @media only screen and (max-width: 430px) {
+                        line-height: 30px;
+                        font: {
+                            size: 30px;
+                            family: aquire, Serif;
+                        };
+                    }
                 }
-                @media only screen and (max-width: 730px) {
-                    line-height: 40px;
-                    font: {
-                        size: 40px;
-                        family: aquire, Serif;
-                    };
-                }
-                @media only screen and (max-width: 430px) {
-                    line-height: 30px;
-                    font: {
-                        size: 30px;
-                        family: aquire, Serif;
-                    };
-                }
-            }
 
-            .sub {
-                z-index: 10;
-                text-transform: uppercase;
-                font-size: 26px;
-                letter-spacing: 12px;
-                font-weight: 100;
-                margin-top: var(--length-margin-l);
-                color: var(--color-content-softer);
-                @media only screen and (max-width: 1300px) {
-                    font-size: 22px;
-                    letter-spacing: 10px;
-                    margin-top: var(--length-margin-m);
-                }
-                @media only screen and (max-width: 730px) {
-                    font-size: 16px;
-                    letter-spacing: 8px;
-                    margin-top: var(--length-margin-s);
-                }
-                @media only screen and (max-width: 430px) {
-                    margin-top: var(--length-margin-xs);
-                    font-size: 10px;
-                    letter-spacing: 4px;
+                .sub {
+                    z-index: 10;
+                    text-transform: uppercase;
+                    font-size: 26px;
+                    letter-spacing: 12px;
+                    font-weight: 100;
+                    margin-top: var(--length-padding-l);
+                    color: var(--color-content-softer);
+                    @media only screen and (max-width: 1300px) {
+                        font-size: 22px;
+                        letter-spacing: 10px;
+                        margin-top: var(--length-padding-m);
+                    }
+                    @media only screen and (max-width: 730px) {
+                        font-size: 16px;
+                        letter-spacing: 8px;
+                        margin-top: var(--length-padding-s);
+                    }
+                    @media only screen and (max-width: 430px) {
+                        margin-top: var(--length-padding-xs);
+                        font-size: 10px;
+                        letter-spacing: 4px;
+                    }
                 }
             }
 
@@ -222,7 +243,7 @@ const cardStyle = computed<CSSProperties>(() => {
                 display: flex;
                 flex-direction: row;
                 width: 100%;
-                height: 100%;
+                height: 20%;
                 .left{
                     gap: var(--length-margin-xs);
                     @media only screen and (max-width: 730px) {

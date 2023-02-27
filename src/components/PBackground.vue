@@ -37,38 +37,38 @@ const envTexture = loader.load(background);
 const repartitionX = ref(15);
 const repartitionY = ref(15);
 const count = ref(255);
-const loadingPage = ref(0);
+const split = ref(0);
 const route = useRoute();
-
-watch(route, () => {
-    loadingPage.value = 1;
-});
-
 
 if (window.innerWidth > 1680){
     repartitionX.value = 18;
     repartitionY.value = 13;
     count.value = 400;
+    split.value = 6;
 }
 else if (window.innerWidth <= 1680 && window.innerWidth > 1200){
     repartitionX.value = 11;
     repartitionY.value = 11;
     count.value = 240;
+    split.value = 6;
 }
 else if (window.innerWidth <= 1200 && window.innerWidth > 800){
     repartitionX.value = 9;
     repartitionY.value = 9;
     count.value = 150;
+    split.value = 6;
 }
 else if (window.innerWidth <= 800 && window.innerWidth > 400){
     repartitionX.value = 7;
     repartitionY.value = 8;
     count.value = 180;
+    split.value = 6;
 }
 else {
     repartitionX.value = 4;
     repartitionY.value = 8;
     count.value = 130;
+    split.value = 6;
 }
 
 envTexture.mapping = THREE.EquirectangularReflectionMapping;
@@ -115,7 +115,8 @@ function getRandomY(max: number, positive?: boolean) {
 }
 
 const meshes: THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>[] = [];
-const customMesh: any[] = [];
+const customMesh: number[] = [];
+const initialX: number[] = [];
 for (let i = 0; i < count.value; i++) {
     const random = Math.floor(getRandom(3));
     customMesh.push(random);
@@ -123,6 +124,7 @@ for (let i = 0; i < count.value; i++) {
     const x = getRandomX(repartitionX.value,i,count.value);
     const y = getRandomY(repartitionY.value);
     const z = -getRandom(4, true);
+    initialX.push(x);
     mesh.position.set(x, y, z);
     const rotationX = Math.random() * Math.PI * 2;
     const rotationY = Math.random() * Math.PI * 2;
@@ -169,40 +171,57 @@ onMounted(() => {
     const clock = new THREE.Clock();
     const tick = () => {
         // Time
-        const elapsedTime = clock.getElapsedTime();
+        const delta = clock.getDelta();
+        const elapsedTime = clock.elapsedTime;
         let index = 0;
         for (const mesh of meshes) {
             if (mesh.position.y < -13){
-                mesh.position.y = 13;
+                mesh.position.y += 26;
+            }
+            if (route.name !== "home"){
+                if (initialX[index] < split.value - 6 && Math.abs(initialX[index] - mesh.position.x) < 10){
+                    mesh.position.x -= delta * 2 ;
+                }
+                if (initialX[index] > split.value - 6 && Math.abs(initialX[index] - mesh.position.x) < 10){
+                    mesh.position.x += delta * 2 ;
+                }
+            }
+            else {
+                if (initialX[index] < split.value - 6 && mesh.position.x < initialX[index]){
+                    mesh.position.x += delta * 2 ;
+                }
+                if (initialX[index] > split.value - 6 && mesh.position.x > initialX[index]){
+                    mesh.position.x -= delta * 2 ;
+                }
             }
             switch (customMesh[index]) {
             case -1:
-                mesh.rotation.y = -elapsedTime * 0.1;
-                mesh.position.y -= 0.01;
+                mesh.rotation.y = -elapsedTime * 0.2;
+                mesh.position.y -= delta * 2;
                 break;
             case -2:
                 mesh.rotation.z = -elapsedTime * 0.3;
-                mesh.position.y -= 0.03;
+                mesh.position.y -= delta * 1.5;
                 break;
             case -3:
-                mesh.rotation.x = -elapsedTime * 0.2;
-                mesh.position.y -= 0.02;
+                mesh.rotation.x = -elapsedTime * 0.1;
+                mesh.position.y -= delta * 3 ;
                 break;
             case 1:
                 mesh.rotation.y = elapsedTime * 0.2;
-                mesh.position.y -= 0.04;
+                mesh.position.y -= delta * 3 ;
                 break;
             case 2:
-                mesh.rotation.z = elapsedTime * 0.1;
-                mesh.position.y -= 0.03;
+                mesh.rotation.z = elapsedTime * 0.4 ;
+                mesh.position.y -= delta;
                 break;
             case 3:
                 mesh.rotation.x = elapsedTime * 0.3;
-                mesh.position.y -= 0.02;
+                mesh.position.y -= delta * 2 ;
                 break;
             default :
                 mesh.rotation.x = elapsedTime * 0.2;
-                mesh.position.y -= 0.01;
+                mesh.position.y -= delta * 1.5;
             }
             index++;
             //mesh.rotation.y = elapsedTime;
@@ -214,41 +233,6 @@ onMounted(() => {
     };
     tick();
 });
-
-/*
-window.addEventListener("resize", () => {
-    // Update sizes
-    sizes.width = window.innerWidth;
-    sizes.height = window.innerHeight;
-
-    // Update camera
-    camera.aspect = sizes.width / sizes.height;
-    camera.updateProjectionMatrix();
-
-    // Update renderer
-    renderer.setSize(sizes.width, sizes.height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-});
-
-
-camera.position.z = 5;
-window.addEventListener("dblclick", () => {
-    if (!document.fullscreenElement){
-        renderer.domElement.requestFullscreen();
-    }
-    else {
-        document.exitFullscreen();
-    }
-});
-const clock = new THREE.Clock();
-const tick = () => {
-    // Time
-    const elapsedTime = clock.getElapsedTime();
-    //cube.rotation.y += 0.01;
-    renderer.render(scene, camera);
-    window.requestAnimationFrame(tick);
-};
-tick();*/
 
 </script>
 
