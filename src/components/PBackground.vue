@@ -39,6 +39,7 @@ const repartitionY = ref(15);
 const count = ref(255);
 const split = ref(0);
 const curtains = ref(0);
+const height = ref(13);
 const route = useRoute();
 
 if (window.innerWidth > 1680){
@@ -47,6 +48,7 @@ if (window.innerWidth > 1680){
     count.value = 400;
     split.value = 6;
     curtains.value = 10;
+    height.value = 13;
 }
 else if (window.innerWidth <= 1680 && window.innerWidth > 1200){
     repartitionX.value = 11;
@@ -54,6 +56,7 @@ else if (window.innerWidth <= 1680 && window.innerWidth > 1200){
     count.value = 240;
     split.value = 6;
     curtains.value = 10;
+    height.value = 13;
 }
 else if (window.innerWidth <= 1200 && window.innerWidth > 800){
     repartitionX.value = 9;
@@ -61,6 +64,7 @@ else if (window.innerWidth <= 1200 && window.innerWidth > 800){
     count.value = 150;
     split.value = 6;
     curtains.value = 10;
+    height.value = 13;
 }
 else if (window.innerWidth <= 800 && window.innerWidth > 400){
     repartitionX.value = 7;
@@ -68,13 +72,15 @@ else if (window.innerWidth <= 800 && window.innerWidth > 400){
     count.value = 180;
     split.value = 6;
     curtains.value = 10;
+    height.value = 12;
 }
 else {
     repartitionX.value = 4;
     repartitionY.value = 8;
-    count.value = 130;
+    count.value = 70;
     split.value = 6;
     curtains.value = 10;
+    height.value = 11;
 }
 
 envTexture.mapping = THREE.EquirectangularReflectionMapping;
@@ -182,8 +188,8 @@ onMounted(() => {
         let index = 0;
         for (const mesh of meshes) {
             const deltaDistance = Math.abs(initialX[index] - mesh.position.x);
-            if (mesh.position.y < -13){
-                mesh.position.y += 26;
+            if (mesh.position.y < -height.value){
+                mesh.position.y += 2 * height.value;
             }
             if (route.name !== "home" && route.name){
                 const splitSpeed = curtains.value - deltaDistance;
