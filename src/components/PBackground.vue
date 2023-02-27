@@ -75,7 +75,7 @@ else if (window.innerWidth <= 800 && window.innerWidth > 400){
     height.value = 12;
 }
 else {
-    repartitionX.value = 4;
+    repartitionX.value = 6;
     repartitionY.value = 8;
     count.value = 70;
     split.value = 6;
