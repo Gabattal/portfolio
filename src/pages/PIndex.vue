@@ -35,7 +35,7 @@
                         >
                             <img
                                 class="logo"
-                                src="src/assets/img/Logo_Malt.svg"
+                                src="src/assets/img/logo_malt.svg"
                             >
                         </a>
                         <a
@@ -44,7 +44,7 @@
                         >
                             <img
                                 class="logo"
-                                src="src/assets/img/LinkedIn_Logo.svg"
+                                src="src/assets/img/linkedin_logo.svg"
                             >
                         </a>
                     </div>
