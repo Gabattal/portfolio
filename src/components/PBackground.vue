@@ -42,7 +42,7 @@ const height = ref(13);
 const route = useRoute();
 const { height: windowHeight, width: windowWidth } = useWindowSize();
 
-if (windowWidth.value > 1680){
+if (window.innerWidth > 1680){
     repartitionX.value = 18;
     repartitionY.value = 13;
     count.value = 400;
@@ -50,7 +50,7 @@ if (windowWidth.value > 1680){
     curtains.value = 10;
     height.value = 13;
 }
-else if (windowWidth.value <= 1680 && windowWidth.value > 1200){
+else if (window.innerWidth <= 1680 && window.innerWidth > 1200){
     repartitionX.value = 11;
     repartitionY.value = 11;
     count.value = 240;
@@ -58,7 +58,7 @@ else if (windowWidth.value <= 1680 && windowWidth.value > 1200){
     curtains.value = 10;
     height.value = 13;
 }
-else if (windowWidth.value <= 1200 && windowWidth.value > 800){
+else if (window.innerWidth <= 1200 && window.innerWidth > 800){
     repartitionX.value = 9;
     repartitionY.value = 9;
     count.value = 150;
@@ -66,7 +66,7 @@ else if (windowWidth.value <= 1200 && windowWidth.value > 800){
     curtains.value = 10;
     height.value = 13;
 }
-else if (windowWidth.value <= 800 && windowWidth.value > 400){
+else if (window.innerWidth <= 800 && window.innerWidth > 400){
     repartitionX.value = 7;
     repartitionY.value = 8;
     count.value = 180;
@@ -154,9 +154,7 @@ for (const mesh of meshes) {
     scene.add(mesh);
 }
 
-
-
-const camera = new THREE.PerspectiveCamera(75, windowWidth.value / windowHeight.value, 0.1, 100);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
 camera.position.z = 7;
 scene.add(camera);
 
@@ -166,6 +164,10 @@ onMounted(() => {
         antialias: true,
         canvas: experience.value as unknown as HTMLCanvasElement
     });
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.render(scene, camera);
     const pmremGenerator = new THREE.PMREMGenerator(renderer);
     const roomGenerator = pmremGenerator.fromScene(new RoomEnvironment(), 0.04);
     scene.environment = roomGenerator.texture;
@@ -173,9 +175,6 @@ onMounted(() => {
     const clock = new THREE.Clock();
     const tick = () => {
         // Time
-        renderer.setSize(windowWidth.value, windowHeight.value);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        renderer.render(scene, camera);
         const delta = clock.getDelta();
         const elapsedTime = clock.elapsedTime;
         let index = 0;
