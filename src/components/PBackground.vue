@@ -169,18 +169,13 @@ onMounted(() => {
     const pmremGenerator = new THREE.PMREMGenerator(renderer);
     const roomGenerator = pmremGenerator.fromScene(new RoomEnvironment(), 0.04);
     scene.environment = roomGenerator.texture;
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.render(scene, camera);
 
     const clock = new THREE.Clock();
     const tick = () => {
         // Time
-        watch(() => windowWidth.value, () => {
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.render(scene, camera);
-        });
+        renderer.setSize(windowWidth.value, windowHeight.value);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.render(scene, camera);
         const delta = clock.getDelta();
         const elapsedTime = clock.elapsedTime;
         let index = 0;

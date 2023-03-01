@@ -94,6 +94,7 @@ export default {
     justify-content: center;
     align-items: center;
     z-index: 1;
+    overflow: hidden;
 
     .hero {
         width: 850px;
@@ -112,7 +113,7 @@ export default {
         }
 
         @media only screen and (max-width: 430px) {
-            width: 272px;
+            width: 372px;
             height: 500px;
         }
 

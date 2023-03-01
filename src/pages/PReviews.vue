@@ -89,6 +89,7 @@ import PStars from "@/components/PStars.vue";
     justify-content: center;
     align-items: center;
     z-index: 1;
+    overflow: hidden;
 
     .hero {
         margin-top: var(--length-margin-xl);

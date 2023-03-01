@@ -117,6 +117,7 @@ const cardStyle = computed<CSSProperties>(() => {
     justify-content: center;
     align-items: center;
     z-index: 1;
+    overflow: hidden;
 
     :hover hero {
         transform: perspective(1000px);
