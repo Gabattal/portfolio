@@ -110,9 +110,6 @@ const cardStyle = computed<CSSProperties>(() => {
 
 <style scoped lang="scss">
 
-.mail :hover{
-        background-color:red
-}
 .main {
     height: 100%;
     position: absolute;
@@ -354,7 +351,6 @@ const cardStyle = computed<CSSProperties>(() => {
                     width: 50%;
                     display: flex;
                     align-items: flex-end;
-                    justify-content: flex-end;
                     flex-direction: column;
                     @media only screen and (max-width: 730px) {
                         gap: 8px
@@ -366,6 +362,10 @@ const cardStyle = computed<CSSProperties>(() => {
                     a {
                         z-index: 1;
 
+                        @media only screen and (max-width: 430px) {
+                            height: 8px;
+                        }
+
                         .logo {
                             cursor: pointer;
                             width: 100px;
@@ -373,7 +373,7 @@ const cardStyle = computed<CSSProperties>(() => {
                                 width: 50px
                             }
                             @media only screen and (max-width: 430px) {
-                                width: 40px
+                                width: 40px;
                             }
                         }
                     }
