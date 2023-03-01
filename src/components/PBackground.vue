@@ -156,9 +156,11 @@ for (const mesh of meshes) {
 
 
 
-const camera = new THREE.PerspectiveCamera(75, windowWidth.value / windowHeight.value, 0.1, 100);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
 camera.position.z = 7;
 scene.add(camera);
+
+
 
 onMounted(() => {
     const renderer = new THREE.WebGLRenderer({
@@ -170,12 +172,16 @@ onMounted(() => {
     const roomGenerator = pmremGenerator.fromScene(new RoomEnvironment(), 0.04);
     scene.environment = roomGenerator.texture;
 
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.render(scene, camera);
+
     const clock = new THREE.Clock();
     const tick = () => {
         // Time
-        renderer.setSize(windowWidth.value, windowHeight.value);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        renderer.render(scene, camera);
+        //renderer.setSize(windowWidth.value, windowHeight.value);
+        //renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        //renderer.render(scene, camera);
         const delta = clock.getDelta();
         const elapsedTime = clock.elapsedTime;
         let index = 0;
