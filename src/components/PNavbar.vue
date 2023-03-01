@@ -18,8 +18,8 @@
             />
             <PHexagonComponent
                 :start-position="({ x: scaleX*3, y: scaleY })"
-                text="Contact"
-                @click="goToPage('/contact')"
+                text="Reviews"
+                @click="goToPage('/reviews')"
             />
             <PHexagonComponent
                 :start-position="({ x: scaleX*4, y: 0 })"

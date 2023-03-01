@@ -13,7 +13,7 @@ import * as THREE from "three";
 import { onMounted, ref, watch } from "vue";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { useRoute } from "vue-router";
-import background from "../assets/img/background.png";
+import { useWindowSize } from "@vueuse/core";
 
 const experience = ref<HTMLCanvasElement | null>(null);
 
@@ -33,7 +33,6 @@ const geometry = new THREE.BufferGeometry();
 geometry.setAttribute("position", positionsAttribute);
 geometry.computeVertexNormals();
 const loader = new THREE.TextureLoader();
-const envTexture = loader.load(background);
 const repartitionX = ref(15);
 const repartitionY = ref(15);
 const count = ref(255);
@@ -41,8 +40,9 @@ const split = ref(0);
 const curtains = ref(0);
 const height = ref(13);
 const route = useRoute();
+const { height: windowHeight, width: windowWidth } = useWindowSize();
 
-if (window.innerWidth > 1680){
+if (windowWidth.value > 1680){
     repartitionX.value = 18;
     repartitionY.value = 13;
     count.value = 400;
@@ -50,7 +50,7 @@ if (window.innerWidth > 1680){
     curtains.value = 10;
     height.value = 13;
 }
-else if (window.innerWidth <= 1680 && window.innerWidth > 1200){
+else if (windowWidth.value <= 1680 && windowWidth.value > 1200){
     repartitionX.value = 11;
     repartitionY.value = 11;
     count.value = 240;
@@ -58,7 +58,7 @@ else if (window.innerWidth <= 1680 && window.innerWidth > 1200){
     curtains.value = 10;
     height.value = 13;
 }
-else if (window.innerWidth <= 1200 && window.innerWidth > 800){
+else if (windowWidth.value <= 1200 && windowWidth.value > 800){
     repartitionX.value = 9;
     repartitionY.value = 9;
     count.value = 150;
@@ -66,7 +66,7 @@ else if (window.innerWidth <= 1200 && window.innerWidth > 800){
     curtains.value = 10;
     height.value = 13;
 }
-else if (window.innerWidth <= 800 && window.innerWidth > 400){
+else if (windowWidth.value <= 800 && windowWidth.value > 400){
     repartitionX.value = 7;
     repartitionY.value = 8;
     count.value = 180;
@@ -83,7 +83,6 @@ else {
     height.value = 11;
 }
 
-envTexture.mapping = THREE.EquirectangularReflectionMapping;
 
 const material = new THREE.MeshPhysicalMaterial({
     color: 0xe0b65c,
@@ -155,16 +154,11 @@ for (const mesh of meshes) {
     scene.add(mesh);
 }
 
-const sizes = {
-    height: window.innerHeight,
-    width: window.innerWidth
-};
 
 
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
+const camera = new THREE.PerspectiveCamera(75, windowWidth.value / windowHeight.value, 0.1, 100);
 camera.position.z = 7;
 scene.add(camera);
-
 
 onMounted(() => {
     const renderer = new THREE.WebGLRenderer({
@@ -176,13 +170,12 @@ onMounted(() => {
     const roomGenerator = pmremGenerator.fromScene(new RoomEnvironment(), 0.04);
     scene.environment = roomGenerator.texture;
 
-
-    renderer.setSize(sizes.width, sizes.height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.render(scene, camera);
     const clock = new THREE.Clock();
     const tick = () => {
         // Time
+        renderer.setSize(windowWidth.value, windowHeight.value);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.render(scene, camera);
         const delta = clock.getDelta();
         const elapsedTime = clock.elapsedTime;
         let index = 0;
@@ -193,28 +186,26 @@ onMounted(() => {
             }
             if (route.name !== "home" && route.name){
                 const splitSpeed = curtains.value - deltaDistance;
-                //const calc = -Math.cos(deltaDistance / 10 * Math.PI) / 2;
-                //console.log(calc);
                 if (initialX[index] < 0 && Math.abs(initialX[index] - mesh.position.x) < curtains.value){
-                    mesh.position.x -= delta * splitSpeed ;
+                    mesh.position.x -= delta * (splitSpeed * Math.abs(customMesh[index] * 4 + 1) / 30);
                 }
                 if (initialX[index] > 0 && Math.abs(initialX[index] - mesh.position.x) < curtains.value){
-                    mesh.position.x += delta * splitSpeed ;
+                    mesh.position.x += delta * (splitSpeed * Math.abs(customMesh[index] * 4 + 1) / 30);
                 }
             }
             else {
                 const gatherSpeed = deltaDistance;
                 if (initialX[index] < 0 && mesh.position.x < initialX[index]){
-                    mesh.position.x += delta * gatherSpeed ;
+                    mesh.position.x += delta * (gatherSpeed * Math.abs(customMesh[index] * 4 + 1) / 30) ;
                 }
                 if (initialX[index] > 0 && mesh.position.x > initialX[index]){
-                    mesh.position.x -= delta * gatherSpeed ;
+                    mesh.position.x -= delta * (gatherSpeed * Math.abs(customMesh[index] * 4 + 1) / 30) ;
                 }
             }
             switch (customMesh[index]) {
             case -1:
                 mesh.rotation.y = -elapsedTime * 0.2;
-                mesh.position.y -= delta * 2;
+                mesh.position.y -= delta * 1.25;
                 break;
             case -2:
                 mesh.rotation.z = -elapsedTime * 0.3;
@@ -222,11 +213,11 @@ onMounted(() => {
                 break;
             case -3:
                 mesh.rotation.x = -elapsedTime * 0.1;
-                mesh.position.y -= delta * 3 ;
+                mesh.position.y -= delta * 2.25 ;
                 break;
             case 1:
                 mesh.rotation.y = elapsedTime * 0.2;
-                mesh.position.y -= delta * 3 ;
+                mesh.position.y -= delta * 2 ;
                 break;
             case 2:
                 mesh.rotation.z = elapsedTime * 0.4 ;
@@ -234,11 +225,11 @@ onMounted(() => {
                 break;
             case 3:
                 mesh.rotation.x = elapsedTime * 0.3;
-                mesh.position.y -= delta * 2 ;
+                mesh.position.y -= delta * 0.75 ;
                 break;
             default :
                 mesh.rotation.x = elapsedTime * 0.2;
-                mesh.position.y -= delta * 1.5;
+                mesh.position.y -= delta * 1.25;
             }
             index++;
             //mesh.rotation.y = elapsedTime;

@@ -8,19 +8,45 @@
                 class="content-card"
                 :style="cardStyle"
             >
+                <section class="availability">
+                    <span>
+                        Available now
+                    </span>
+                </section>
                 <section class="info">
                     <span class="title">Gabriel Attal</span>
                     <span class="sub">Fullstack developer</span>
-                    <span class="sub">--Available now--</span>
                 </section>
                 <section class="contact">
                     <div class="left">
-                        <span class="phone">+33 6 95 64 98 25</span>
-                        <span class="mail">gabriel.attal.pro@gmail.com</span>
+                        <a
+                            class="phone"
+                            :href="`tel:+33 6 95 64 98 25`"
+                        >+33 6 95 64 98 25</a>
+                        <a
+                            class="mail"
+                            :href="`mailto:gabriel.attal.pro@gmail.com`"
+                        >gabriel.attal.pro@gmail.com</a>
                     </div>
                     <div class="right">
-                        <span class="link">Malt</span>
-                        <span class="link">Linkedin</span>
+                        <a
+                            href="https://www.malt.fr/profile/gabrielattal"
+                            target="_blank"
+                        >
+                            <img
+                                class="logo"
+                                src="src/assets/img/Logo_Malt.svg"
+                            >
+                        </a>
+                        <a
+                            href="https://www.linkedin.com/in/attal-gabriel/"
+                            target="_blank"
+                        >
+                            <img
+                                class="logo"
+                                src="src/assets/img/LinkedIn_Logo.svg"
+                            >
+                        </a>
                     </div>
                 </section>
                 <div class="glow" />
@@ -50,13 +76,13 @@ const cardStyle = computed<CSSProperties>(() => {
         return {};
     }
 
-    if (window.innerWidth < 1300){
+    if (window.innerWidth < 1300) {
         angleRatio = 18;
     }
-    if (window.innerWidth < 730){
+    if (window.innerWidth < 730) {
         angleRatio = 12;
     }
-    if (window.innerWidth < 430){
+    if (window.innerWidth < 430) {
         angleRatio = 6;
     }
     const x = mouseX.value - bounding.x;
@@ -121,8 +147,8 @@ const cardStyle = computed<CSSProperties>(() => {
         }
 
 
-        &:hover{
-            scale:(1.05);
+        &:hover {
+            scale: (1.05);
         }
 
 
@@ -151,22 +177,44 @@ const cardStyle = computed<CSSProperties>(() => {
             --glowY: 0;
             transition: all .15s ease-out;
 
-            &:hover{
+            &:hover {
                 transform: rotateX(var(--angleX)) rotateY(var(--angleY));
                 box-shadow: 0 0 8px var(--color-primary);
-                .glow{
+
+                .glow {
                     background: radial-gradient(circle at var(--glowX) var(--glowY), var(--color-primary), transparent);
                     transition: all .50s ease-in-out;
                 }
             }
 
-            .info{
-                height: 80%;
+            .availability {
+                width: 100%;
+                height: 15%;
+                display: flex;
+                justify-content: flex-end;
+                font-family: Bahnschrift;
+                font-size: 20px;
+                font-weight: bold;
+                text-shadow: 0 0 32px var(--color-primary-lighter);
+                color: var(--color-primary-lighter);
+                @media only screen and (max-width: 730px) {
+                    font-size: 16px;
+                }
+                @media only screen and (max-width: 430px) {
+                    font-size: 12px;
+                }
+            }
+
+            .info {
+                width: 100%;
+                height: 65%;
                 z-index: 100;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+                position: relative;
+
                 .title {
                     z-index: 10;
                     background: linear-gradient(to bottom, var(--color-primary-lighter) 0%, var(--color-primary-darker) 100%);
@@ -228,10 +276,10 @@ const cardStyle = computed<CSSProperties>(() => {
                 }
             }
 
-            .glow{
+            .glow {
                 position: absolute;
                 top: 0;
-                left:0;
+                left: 0;
                 width: 100%;
                 height: 100%;
                 opacity: 0.1;
@@ -239,27 +287,31 @@ const cardStyle = computed<CSSProperties>(() => {
                 mix-blend-mode: hard-light;
             }
 
-            .contact{
+            .contact {
                 display: flex;
                 flex-direction: row;
                 width: 100%;
                 height: 20%;
-                .left{
+
+                .left {
                     gap: var(--length-margin-xs);
                     @media only screen and (max-width: 730px) {
                         gap: 8px
                     }
                     @media only screen and (max-width: 430px) {
-                        gap : 4px
+                        gap: 4px
                     }
                     width: 50%;
                     display: flex;
                     flex-direction: column;
                     justify-content: flex-end;
-                    .phone{
+
+                    .phone {
+                        cursor: pointer;
                         z-index: 10;
                         text-transform: uppercase;
                         font-size: 16px;
+                        font-family: Bahnschrift;
                         letter-spacing: 2px;
                         color: var(--color-primary);
 
@@ -272,9 +324,12 @@ const cardStyle = computed<CSSProperties>(() => {
                             letter-spacing: 1px;
                         }
                     }
-                    .mail{
+
+                    .mail {
+                        cursor: pointer;
                         z-index: 10;
                         text-transform: uppercase;
+                        font-family: Bahnschrift;
                         font-size: 12px;
                         letter-spacing: 2px;
                         color: var(--color-primary);
@@ -289,7 +344,8 @@ const cardStyle = computed<CSSProperties>(() => {
                         }
                     }
                 }
-                .right{
+
+                .right {
                     gap: var(--length-margin-xs);
                     width: 50%;
                     display: flex;
@@ -300,9 +356,25 @@ const cardStyle = computed<CSSProperties>(() => {
                         gap: 8px
                     }
                     @media only screen and (max-width: 430px) {
-                        gap : 4px
+                        gap: 4px
                     }
-                    .link{
+
+                    a {
+                        z-index: 1;
+
+                        .logo {
+                            cursor: pointer;
+                            width: 100px;
+                            @media only screen and (max-width: 730px) {
+                                width: 50px
+                            }
+                            @media only screen and (max-width: 430px) {
+                                width: 40px
+                            }
+                        }
+                    }
+
+                    .link {
                         z-index: 10;
                         text-transform: uppercase;
                         font-size: 12px;

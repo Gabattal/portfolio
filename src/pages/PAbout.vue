@@ -10,10 +10,32 @@
                 <section class="info">
                     <span class="title">About</span>
                     <p class="sub">
-                        I'm an experienced French web developer specializing in React and Vue frameworks. My
-                        technical expertise enables me to quickly adapt to various projects, whether working solo or in
-                        a team, while delivering clean, structured, and optimized code. I love tackling challenges and
-                        building creative websites.
+                        I'm an experienced French web developer specializing in
+                        <span class="highlight">
+                            React
+                        </span>
+                        and <span class="highlight">
+                            Vue
+                        </span> frameworks. My
+                        technical expertise enables me to <span class="highlight">
+                            quickly
+                        </span> adapt to
+                        <span class="highlight">
+                            various
+                        </span>
+                        projects, whether working solo or in
+                        a team, while delivering
+                        <span class="highlight">
+                            clean, structured, and optimized code
+                        </span>
+                        . I love tackling
+                        <span class="highlight">
+                            challenges
+                        </span>
+                        and building
+                        <span class="highlight">
+                            creative websites.
+                        </span>
                     </p>
                 </section>
             </div>
@@ -81,11 +103,6 @@ export default {
             @media only screen and (max-width: 430px) {
                 padding: var(--length-padding-s);
             }
-            animation: loading 4s forwards;
-            --angleX: 0deg;
-            --angleY: 0deg;
-            --glowX: 50%;
-            --glowY: 0;
             transition: all .15s ease-out;
 
             .info {
@@ -134,10 +151,9 @@ export default {
 
                 .sub {
                     z-index: 10;
-                    line-height: 2em;
+                    line-height: 1.5em;
                     font-size: 20px;
-
-
+                    font-family: Bahnschrift;
                     font-weight: 100;
                     margin-top: var(--length-padding-l);
                     color: var(--color-content-soft);
@@ -153,102 +169,13 @@ export default {
                         margin-top: var(--length-padding-xs);
                         font-size: 12px;
                     }
-                }
-            }
 
-            .contact {
-                display: flex;
-                flex-direction: row;
-                width: 100%;
-                height: 20%;
+                    .highlight {
+                        font-weight: bold;
+                        text-shadow: 0 0 32px var(--color-primary-lighter);
+                        color: var(--color-primary-lighter);
 
-                .left {
-                    gap: var(--length-margin-xs);
-                    @media only screen and (max-width: 730px) {
-                        gap: 8px
                     }
-                    @media only screen and (max-width: 430px) {
-                        gap: 4px
-                    }
-                    width: 50%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-end;
-
-                    .phone {
-                        z-index: 10;
-                        text-transform: uppercase;
-                        font-size: 16px;
-                        letter-spacing: 2px;
-                        color: var(--color-primary);
-
-                        @media only screen and (max-width: 730px) {
-                            font-size: 12px;
-                            letter-spacing: 2px;
-                        }
-                        @media only screen and (max-width: 430px) {
-                            font-size: 10px;
-                            letter-spacing: 1px;
-                        }
-                    }
-
-                    .mail {
-                        z-index: 10;
-                        text-transform: uppercase;
-                        font-size: 12px;
-                        letter-spacing: 2px;
-                        color: var(--color-primary);
-
-                        @media only screen and (max-width: 730px) {
-                            font-size: 10px;
-                            letter-spacing: 2px;
-                        }
-                        @media only screen and (max-width: 430px) {
-                            font-size: 8px;
-                            letter-spacing: 1px;
-                        }
-                    }
-                }
-
-                .right {
-                    gap: var(--length-margin-xs);
-                    width: 50%;
-                    display: flex;
-                    align-items: flex-end;
-                    justify-content: flex-end;
-                    flex-direction: column;
-                    @media only screen and (max-width: 730px) {
-                        gap: 8px
-                    }
-                    @media only screen and (max-width: 430px) {
-                        gap: 4px
-                    }
-
-                    .link {
-                        z-index: 10;
-                        text-transform: uppercase;
-                        font-size: 12px;
-                        letter-spacing: 2px;
-                        color: var(--color-primary);
-
-                        @media only screen and (max-width: 730px) {
-                            font-size: 10px;
-                            letter-spacing: 2px;
-                        }
-                        @media only screen and (max-width: 430px) {
-                            font-size: 8px;
-                            letter-spacing: 1px;
-                        }
-                    }
-                }
-            }
-
-            @keyframes loading {
-                from {
-                    backdrop-filter: blur(0);
-                }
-                to {
-                    backdrop-filter: blur(16px);
                 }
             }
         }

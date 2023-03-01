@@ -7,7 +7,7 @@
         />
         <PSVGHexagon
             class="internal"
-            :location="({ x: 12.5+startPosition.x, y: 12.5+startPosition.y })"
+            :location="({ x: 12.5+startPosition.x - phoneAdjust*5, y: 12.5+startPosition.y - phoneAdjust*5 })"
             :scale="littleHexagon"
         />
         <text
@@ -44,23 +44,28 @@ const props = withDefaults(defineProps<{
 //emits("click",[]);
 const bigHexagon = ref(1.5);
 const littleHexagon = ref(1.25);
+const phoneAdjust = ref(0);
 
 watch(() => windowWidth.value , (newWidth) => {
     if (windowWidth.value > 730){
         bigHexagon.value = 1.5;
         littleHexagon.value = 1.25;
+        phoneAdjust.value = 0;
     }
     else if (windowWidth.value <= 730 && windowWidth.value > 530){
         bigHexagon.value = 1.25;
-        littleHexagon.value = 1;
+        littleHexagon.value = 1.07;
+        phoneAdjust.value = 0.7;
     }
     else if (windowWidth.value <= 530 && windowWidth.value > 440){
         bigHexagon.value = 1;
-        littleHexagon.value = 0.75;
+        littleHexagon.value = 0.83;
+        phoneAdjust.value = 0.8;
     }
     else {
         bigHexagon.value = 0.78;
-        littleHexagon.value = 0.53;
+        littleHexagon.value = 0.63;
+        phoneAdjust.value = 1;
     }
 },{ immediate: true });
 
@@ -73,6 +78,16 @@ watch(() => windowWidth.value , (newWidth) => {
     fill: var(--color-background);
     stroke: var(--color-primary);
     stroke-width: 5px;
+
+    @media only screen and (max-width : 730px) {
+        stroke-width: 4px;
+    }
+    @media only screen and (max-width : 530px) {
+        stroke-width: 3px;
+    }
+    @media only screen and (max-width : 440px) {
+        stroke-width: 2px;
+    }
 
 }
 
@@ -97,7 +112,7 @@ text {
     font-weight: 100;
     fill: var(--color-background);
     font: {
-        size: 22px;
+        size: 20px;
         family: aquire-bold, Serif;
     };
     @media only screen and (max-width : 730px) {

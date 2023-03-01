@@ -25,9 +25,9 @@ export const router = createRouter({
         }
         ,
         {
-            name: "contact",
-            component: () => import("@/pages/PContact.vue"),
-            path: "/contact"
+            name: "reviews",
+            component: () => import("@/pages/PReviews.vue"),
+            path: "/reviews"
         }
         ,
         {
