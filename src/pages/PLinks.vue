@@ -27,7 +27,7 @@ export default {
     right: 0;
     text-align: center;
     z-index: 1;
-    overflow: hidden;
+
     .hero{
         gap: 16px;
         flex-direction: column;

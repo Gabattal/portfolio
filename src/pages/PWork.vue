@@ -76,7 +76,6 @@ export default {
     justify-content: center;
     align-items: center;
     z-index: 1;
-    overflow: hidden;
 
     .hero {
         width: 850px;
