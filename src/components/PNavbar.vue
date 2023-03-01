@@ -8,7 +8,7 @@
             />
             <PHexagonComponent
                 :start-position="({ x: scaleX, y: scaleY })"
-                text="Work"
+                text="Works"
                 @click="goToPage('/work')"
             />
             <PHexagonComponent

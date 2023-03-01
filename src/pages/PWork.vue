@@ -8,7 +8,7 @@
                 class="content-card"
             >
                 <section class="info">
-                    <span class="title">Work</span>
+                    <span class="title">Works</span>
                     <div class="card">
                         <span class="subtitle">Freelance</span>
                         <span class="date">10/2022 - now</span>
