@@ -41,24 +41,24 @@ import { ref, watch } from "vue";
 import { useWindowSize } from "@vueuse/core";
 import PHexagonComponent from "@/components/PHexagonComponent.vue";
 import { router } from "@/router";
-const { width: windowWidth } = useWindowSize();
+const { height: windowHeight, width: windowWidth } = useWindowSize();
 const scaleX = ref(120);
 const scaleY = ref(70);
 
-watch(() => windowWidth.value , () => {
+watch(() => [windowWidth.value, windowHeight.value] , () => {
     if (windowWidth.value > 730){
         scaleX.value = 120;
         scaleY.value = 70;
     }
-    else if (windowWidth.value <= 730 && windowWidth.value > 530){
+    if (windowWidth.value <= 730 && windowWidth.value > 530){
         scaleX.value = 102.5;
         scaleY.value = 60;
     }
-    else if (windowWidth.value <= 530 && windowWidth.value > 440){
+    if (windowWidth.value <= 530 && windowWidth.value > 440 || windowHeight.value < 840){
         scaleX.value = 85;
         scaleY.value = 50;
     }
-    else {
+    if (windowWidth.value <= 440) {
         scaleX.value = 66.5;
         scaleY.value = 38;
     }
@@ -83,6 +83,10 @@ async function goToPage(pageName: string){
         animation: loading 2s forwards;
         width: 630px;
         height: 220px;
+        @media only screen and (max-height: 840px) {
+            width: 441px;
+            height: 152px;
+        }
         @media only screen and (max-width: 730px) {
             width: 535px;
             height: 185px;

@@ -31,7 +31,7 @@ import { useWindowSize } from "@vueuse/core";
 import PSVGHexagon from "@/components/PSVGHexagon.vue";
 import { TVector } from "@/lib/geometry";
 
-const { width: windowWidth } = useWindowSize();
+const { height: windowHeight, width: windowWidth } = useWindowSize();
 const props = withDefaults(defineProps<{
     startPosition?: TVector;
     text?: string;
@@ -46,23 +46,23 @@ const bigHexagon = ref(1.5);
 const littleHexagon = ref(1.25);
 const phoneAdjust = ref(0);
 
-watch(() => windowWidth.value , (newWidth) => {
+watch(() => [windowWidth.value, windowHeight.value] , (newWidth) => {
     if (windowWidth.value > 730){
         bigHexagon.value = 1.5;
         littleHexagon.value = 1.25;
         phoneAdjust.value = 0;
     }
-    else if (windowWidth.value <= 730 && windowWidth.value > 530){
+    if (windowWidth.value <= 730 && windowWidth.value > 530){
         bigHexagon.value = 1.25;
         littleHexagon.value = 1.07;
         phoneAdjust.value = 0.7;
     }
-    else if (windowWidth.value <= 530 && windowWidth.value > 440){
+    if ((windowWidth.value <= 530 && windowWidth.value > 440) || windowHeight.value < 840){
         bigHexagon.value = 1;
         littleHexagon.value = 0.83;
         phoneAdjust.value = 0.8;
     }
-    else {
+    if (windowWidth.value <= 440) {
         bigHexagon.value = 0.78;
         littleHexagon.value = 0.63;
         phoneAdjust.value = 1;
@@ -115,7 +115,13 @@ text {
         size: 20px;
         family: aquire-bold, Serif;
     };
-    @media only screen and (max-width : 730px) {
+    @media only screen and (max-height : 840px){
+        font:  {
+            size: 13px;
+            family: aquire-bold, Serif;
+        };
+    }
+    @media only screen and (max-width : 730px){
         font:  {
             size: 16px;
             family: aquire-bold, Serif;
