@@ -7,23 +7,10 @@ const alias = {
 };
 
 export default defineConfig({
-    build: {
-        outDir: "dist"
-    },
-    plugins: [
-        vue({
-            template: {
-                compilerOptions: {
-                    isCustomElement: (tag) => ["md-linedivider"].includes(tag)
-                }
-            }
-        })
-    ],
-    publicDir: "assets",
+    plugins: [vue()],
     resolve: {
         alias
     },
-    root: "./",
     server: {
         host: "127.0.0.1",
         port: 5555

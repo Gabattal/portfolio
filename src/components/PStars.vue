@@ -80,11 +80,11 @@ watch(() => windowWidth.value , () => {
             height: 23px;
         }
         @media only screen and (max-width: 530px) {
-            width: 146px;
+            width: 80px;
             height: 23px;
         }
         @media only screen and (max-width: 440px) {
-            width: 146px;
+            width: 55px;
             height: 23px;
         }
 

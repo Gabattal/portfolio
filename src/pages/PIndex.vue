@@ -35,7 +35,7 @@
                         >
                             <img
                                 class="logo"
-                                src="/public/malt.svg"
+                                src="/malt.svg"
                             >
                         </a>
                         <a
@@ -44,7 +44,7 @@
                         >
                             <img
                                 class="logo"
-                                src="/public/linkedin.svg"
+                                src="/linkedin.svg"
                             >
                         </a>
                     </div>
@@ -109,6 +109,10 @@ const cardStyle = computed<CSSProperties>(() => {
 </script>
 
 <style scoped lang="scss">
+
+.mail :hover{
+        background-color:red
+}
 .main {
     height: 100%;
     position: absolute;
