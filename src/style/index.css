@@ -66,15 +66,16 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-body {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
+@media screen and (orientation: landscape) {
+  body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
 }
-
 a {
   text-decoration: none;
   color: var(--color-primary);
