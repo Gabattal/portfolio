@@ -83,10 +83,7 @@ async function goToPage(pageName: string){
         animation: loading 2s forwards;
         width: 630px;
         height: 220px;
-        @media only screen and (max-height: 840px) {
-            width: 441px;
-            height: 152px;
-        }
+
         @media only screen and (max-width: 730px) {
             width: 535px;
             height: 185px;
@@ -98,6 +95,10 @@ async function goToPage(pageName: string){
         @media only screen and (max-width: 440px) {
             width: 345px;
             height: 120px;
+        }
+        @media only screen and (max-height: 840px) {
+            width: 441px;
+            height: 152px;
         }
 
         @keyframes loading {

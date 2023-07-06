@@ -24,6 +24,19 @@
                         work with Gabriel!"
                     </p>
                     <div class="review">
+                        <span class="subtitle">Kraaft</span>
+                        <div class="stars">
+                            <PStars />
+                        </div>
+                    </div>
+                    <p class="sub">
+                        "Gabriel worked on a relatively complex feature involving shared Web + Mobile code, at a time
+                        when we needed reinforcements. He was able to quickly deliver a 1st version and then adjust it
+                        according to code review feedback, to deliver a very good piece of work at the end of the
+                        assignment. He's highly motivated, communicates well and has a great appetite for learning new
+                        things."
+                    </p>
+                    <div class="review">
                         <span class="subtitle">Stayfit</span>
                         <div class="stars">
                             <PStars />
